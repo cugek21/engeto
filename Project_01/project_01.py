@@ -39,8 +39,8 @@ user_data = {
     'mike': 'password123', 
     'liz': 'pass123'
 }
-attempts = 5
 
+attempts = 5
 separator = '-' * 40
 exit_str = 'All attempts used. Terminating program.'
 
@@ -106,14 +106,14 @@ for title in selected_text.split():
         title_num += 1
 print('There are {} titlecase words.'.format(title_num))
 
-#Words in upper only
+#Words in upper
 upper_num = 0
 for upper in selected_text.split():
     if upper.isupper() and upper.isalpha():
         upper_num += 1
 print('There are {} uppercase words.'.format(upper_num))
 
-#Words in lower only
+#Words in lower
 lower_num = 0
 for lower in selected_text.split():
     if lower.islower():
