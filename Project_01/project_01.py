@@ -51,8 +51,8 @@ while login:
     username = input('Enter username:').strip()
     login_count += 1
     if username in user_data:
-        password = input('Enter password:').strip()
-        if password in user_data.get(username):
+        password = input('Enter password:')
+        if password == user_data.get(username):
             login = False
         elif login_count < attempts:
             print('Wrong password. {} attempt(s) remaining.'.format(attempts - login_count))
@@ -72,22 +72,22 @@ print('Welcome to the app, {}.'.format(username.capitalize()))
 print('We have 3 texts to be analyzed.')
 print(separator)
 
-#Selection of text to analyze
+#Text selection
 selection = True
 selection_count = 0
 while selection:
     text_num = input('Enter a number btw. 1 and 3 to select:').strip()
     selection_count += 1
-    if text_num.isnumeric():
+    if text_num.isdigit():
         if int(text_num) in range(1,4):
             selection = False
         elif selection_count < attempts:
-            print('Number isn\'t in range. {} attempt(s) remaining.'.format(attempts - selection_count))
+            print('Number isn`t in range. {} attempt(s) remaining.'.format(attempts - selection_count))
         else:
             print(exit_str)
             exit()
     elif selection_count < attempts:
-        print('That isn\'t number. {} attempt(s) remaining.'.format(attempts - selection_count))
+        print('That isn`t number. {} attempt(s) remaining.'.format(attempts - selection_count))
     else:
         print(exit_str)
         exit()
@@ -96,43 +96,31 @@ selected_text = TEXTS[int(text_num) - 1]
 
 print(separator)
 
-#Amount of words
+
+#Stats
+title = 0
+upper = 0
+lower = 0
+numeric = 0
+sum_ = 0
+
+for word in selected_text.split():
+    if word.istitle():
+        title += 1
+    if word.isupper() and word.isalpha():
+        upper += 1
+    if word.islower():
+        lower += 1
+    if word.isnumeric():
+        numeric += 1
+        sum_ += int(word)
+
 print('There are {} words in the selected text.'.format(len(selected_text.split())))
-
-#Amount of titled words
-title_num = 0
-for title in selected_text.split():
-    if title.istitle():
-        title_num += 1
-print('There are {} titlecase words.'.format(title_num))
-
-#Words in upper
-upper_num = 0
-for upper in selected_text.split():
-    if upper.isupper() and upper.isalpha():
-        upper_num += 1
-print('There are {} uppercase words.'.format(upper_num))
-
-#Words in lower
-lower_num = 0
-for lower in selected_text.split():
-    if lower.islower():
-        lower_num += 1
-print('There are {} lowercase words.'.format(lower_num))
-
-#Amount of numeric str
-numeric_num = 0
-for numeric in selected_text.split():
-    if numeric.isnumeric():
-        numeric_num += 1
-print('There are {} numeric strings.'.format(numeric_num))
-
-#Sum of numbers
-sum_result = 0
-for numbers in selected_text.split():
-    if numbers.isnumeric():
-        sum_result = sum_result + int(numbers)
-print('The sum of all the numbers {}.'.format(sum_result))
+print('There are {} titlecase words.'.format(title))
+print('There are {} uppercase words.'.format(upper))
+print('There are {} lowercase words.'.format(lower))
+print('There are {} numeric strings.'.format(numeric))
+print('The sum of all the numbers {}.'.format(sum_))
 
 
 print(separator)
